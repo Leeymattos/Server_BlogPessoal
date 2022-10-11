@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostagemModule } from './postagem/entities/postagem.module';
+import { TemaModule } from './tema/entities/tema.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { PostagemModule } from './postagem/entities/postagem.module';
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
       synchronize: true
     }),
-    PostagemModule
+    PostagemModule,
+    TemaModule
   ],
   controllers: [],
   providers: [],

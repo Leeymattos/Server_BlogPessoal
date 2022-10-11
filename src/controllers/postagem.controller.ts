@@ -10,7 +10,7 @@ export class PostagemContoller {
 
     @Get('/postagem')
     @HttpCode(HttpStatus.OK)
-    findAll(): Promise<Postagem[]> {
+    callFindAll(): Promise<Postagem[]> {
         return this.postagemService.findAll()
     }
 }
