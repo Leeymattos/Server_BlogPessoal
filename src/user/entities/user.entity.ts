@@ -1,5 +1,5 @@
 import { IsNotEmpty } from "class-validator"
-import { Post } from "src/post/entities/post.entity"
+import { Post } from "../../post/entities/post.entity"
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 
 @Entity('tb_users')

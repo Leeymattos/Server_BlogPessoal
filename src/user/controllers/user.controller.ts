@@ -1,4 +1,5 @@
-import { Controller, Get, HttpCode, HttpStatus, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Put, UseGuards } from "@nestjs/common";
+import { JwtAuthGuard } from "../../auth/guards/jwt-auth.guard";
 import { User } from "../entities/user.entity";
 import { UserService } from "../services/user.service";
 
@@ -9,6 +10,7 @@ export class UserController {
     ) { }
 
     @Get()
+    @UseGuards(JwtAuthGuard)
     @HttpCode(HttpStatus.OK)
     callFindAll(): Promise<User[]> {
         return this.userService.findAll()
@@ -16,13 +18,14 @@ export class UserController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    callCreate(user: User): Promise<User> {
+    callCreate(@Body() user: User): Promise<User> {
         return this.userService.create(user);
     }
 
     @Put()
+    @UseGuards(JwtAuthGuard)
     @HttpCode(HttpStatus.OK)
-    callUpdate(user: User): Promise<User> {
+    callUpdate(@Body() user: User): Promise<User> {
         return this.userService.update(user);
     }
 }

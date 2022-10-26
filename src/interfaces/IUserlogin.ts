@@ -1,4 +1,4 @@
-export class Auth {
+export interface UserLogin {
     email: string
     password: string
 }

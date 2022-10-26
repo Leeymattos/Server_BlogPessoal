@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Post as methodPost, Put } from "@nestjs/common";
-import { Post } from "src/post/entities/post.entity";
-import { PostService } from "src/post/services/post.service";
+import { Post } from "../../post/entities/post.entity";
+import { PostService } from "../../post/services/post.service";
 
 
 @Controller('/post')

@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Theme } from "src/theme/entities/theme.entity";
+import { Theme } from "../../theme/entities/theme.entity";
 import { DeleteResult, ILike, Repository } from "typeorm";
 
 @Injectable()
