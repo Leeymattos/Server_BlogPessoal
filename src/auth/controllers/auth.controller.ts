@@ -1,8 +1,10 @@
 import { Controller, HttpCode, HttpStatus, Post, Req, UseGuards } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger/dist";
 import { TrafficableUser } from "../../interfaces/ITrafficableUser";
 import { localAuthGuard } from "../guards/local-auth.guard";
 import { AuthService } from "../services/auth.service";
 
+@ApiTags('User')
 @Controller('/auth')
 export class AuthController {
 

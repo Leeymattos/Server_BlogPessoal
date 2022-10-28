@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseUUIDPipe, Post as methodPost, Put } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger/dist";
 
 import { Post } from "../../post/entities/post.entity";
 import { PostService } from "../../post/services/post.service";
 
-
+@ApiTags('Post')
 @Controller('/post')
+@ApiBearerAuth()
 export class PostContoller {
 
     constructor(private readonly postService: PostService) { }

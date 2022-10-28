@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { Bcrypt } from "../../auth/bcrypt/auth.service";
+import { Bcrypt } from "../../auth/bcrypt/bcrypt";
 import { User } from "../entities/user.entity";
 
 @Injectable()
@@ -53,6 +53,9 @@ export class UserService {
         const userFound = await this.findByEmail(user.email);
 
         if (!userFound) {
+            if (user.id) {
+                delete (user.id);
+            }
             user.password = await this.bcrypt.hashPassword(user.password);
             return await this.userRepository.save(user);
         }
