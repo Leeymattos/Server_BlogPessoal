@@ -16,7 +16,7 @@ import { LocalStrategy } from "./strategies/local.strategy";
         UserModule,
         PassportModule,
         JwtModule.register({
-            secret: 'dbaiudnasdbas',
+            secret: process.env.JWT_SECRET_KEY,
             signOptions: { expiresIn: '24h' }
         })
     ],
