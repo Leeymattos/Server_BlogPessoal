@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { IResponseJwtStrategy } from "src/interfaces/IResponseJwtStrategy";
 import { Repository } from "typeorm";
 
 import { Bcrypt } from "../../auth/bcrypt/bcrypt";
@@ -63,8 +64,11 @@ export class UserService {
         throw new HttpException('O email já existe!', HttpStatus.BAD_REQUEST);
     }
 
-    async update(user: User) {
-        this.findById(user.id);
+    async update(user: User, userValidate: IResponseJwtStrategy): Promise<User> {
+
+        user.id = userValidate.id
+
+        await this.findById(user.id);
         const userFound = await this.findByEmail(user.email);
 
         if (userFound && userFound.id !== user.id) {

@@ -1,6 +1,6 @@
 import { Post } from "../post/entities/post.entity";
 
-export interface TrafficableUser {
+export interface ITrafficableUser {
     id: string;
     name: string;
     email: string;

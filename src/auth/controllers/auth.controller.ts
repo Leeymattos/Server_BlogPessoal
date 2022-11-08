@@ -1,6 +1,7 @@
 import { Controller, HttpCode, HttpStatus, Post, Req, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger/dist";
-import { TrafficableUser } from "../../interfaces/ITrafficableUser";
+import { Request } from "express";
+import { ITrafficableUser } from "src/interfaces/ITrafficableUser";
 import { localAuthGuard } from "../guards/local-auth.guard";
 import { AuthService } from "../services/auth.service";
 
@@ -15,7 +16,7 @@ export class AuthController {
     @UseGuards(localAuthGuard)
     @HttpCode(HttpStatus.OK)
     @Post('/login')
-    async login(@Req() req: TrafficableUser) {
-        return this.authService.login(req)
+    async login(@Req() req: Request) {
+        return await this.authService.login(req.user as ITrafficableUser);
     }
 }

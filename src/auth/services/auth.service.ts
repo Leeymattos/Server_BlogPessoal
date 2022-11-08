@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { TrafficableUser } from "../../interfaces/ITrafficableUser";
+import { IResponseLogin } from "src/interfaces/IResponseLogin";
+import { ITrafficableUser } from "../../interfaces/ITrafficableUser";
 import { UserService } from "../../user/services/user.service";
 import { Bcrypt } from "../bcrypt/bcrypt";
 
@@ -12,7 +13,7 @@ export class AuthService {
         private jwtService: JwtService
     ) { }
 
-    async validateUser(email: string, password: string): Promise<TrafficableUser | null> {
+    async validateUser(email: string, password: string): Promise<ITrafficableUser | null> {
 
         const userFound = await this.userService.findByEmail(email);
 
@@ -29,14 +30,14 @@ export class AuthService {
         return null;
     }
 
-    async login(user: TrafficableUser) {
+    async login(user: ITrafficableUser): Promise<IResponseLogin> {
         const payload = {
             sub: user.id,
             email: user.email
         }
 
         return {
-            user: user.email,
+            email: user.email,
             token: `Bearer ${this.jwtService.sign(payload)}`
         }
     }

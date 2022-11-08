@@ -16,12 +16,14 @@ export class PostService {
 
     async create(post: Post): Promise<Post> {
 
-        if (post.theme) {
-            const theme = await this.themeService.findById(post.theme.id);
+        if (!post.theme || !post.theme.id) {
+            throw new HttpException('Categoria não informada!', HttpStatus.BAD_REQUEST);
+        }
 
-            if (!theme) {
-                throw new HttpException('Tema não encontrado!', HttpStatus.NOT_FOUND);
-            }
+        const theme = await this.themeService.findById(post.theme.id);
+
+        if (!theme) {
+            throw new HttpException('Tema não encontrado!', HttpStatus.NOT_FOUND);
         }
 
         return await this.postRepository.save(post);
